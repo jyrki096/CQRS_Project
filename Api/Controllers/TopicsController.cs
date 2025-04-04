@@ -9,7 +9,7 @@ namespace API.Controllers
     [ApiController]
     public class TopicsController(ITopicService topicService) : ControllerBase
     {
-        [HttpGet("/")]
+        [HttpGet]
         public async Task<ActionResult<List<Topic>>> GetTopics()
         {
             return Ok(await topicService.GetTopicsAsync());
