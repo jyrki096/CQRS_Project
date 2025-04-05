@@ -1,12 +1,12 @@
-﻿using Domain.Models;
+﻿using Application.Dtos;
 
 namespace Application.Topics;
 
 public interface ITopicService
 {
-    Task<List<Topic>> GetTopicsAsync();
-    Task<Topic> GetTopicAsync(Guid id);
-    Task<Topic> CreateTopicAsync(Topic topicRequestDto);
-    Task<Topic> UpdateTopicAsync(Guid id, Topic topicRequestDto);
-    Task<Topic> DeleteTopicAsync(Guid id);
+    Task<List<TopicResponseDto>> GetTopicsAsync();
+    Task<TopicResponseDto> GetTopicAsync(Guid id);
+    Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto topicRequestDto);
+    Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicRequestDto topicRequestDto);
+    Task DeleteTopicAsync(Guid id);
 }
