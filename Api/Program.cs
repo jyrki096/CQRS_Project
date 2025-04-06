@@ -2,6 +2,10 @@ using Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+
+builder.Logging.AddConsole();
+
 builder.Services.AddApiServices()
                 .AddApplicationServices()
                 .AddInfrastructureServices(builder.Configuration);
