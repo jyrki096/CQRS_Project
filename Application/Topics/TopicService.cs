@@ -34,12 +34,14 @@ public class TopicService(IApplicationDbContext dbContext,
         var topicId = TopicId.Of(id);
         var topic = await dbContext.Topics.FindAsync([topicId]);
 
-        if (topic is null)
+        if (topic is null || topic.IsDeleted)
         {
             throw new TopicNotFoundException(id);
         }
 
-        dbContext.Topics.Remove(topic!);
+        topic.IsDeleted = true;
+        topic.DeletedAt = DateTimeOffset.UtcNow;
+        //dbContext.Topics.Remove(topic!);
         await dbContext.SaveChangesAsync(CancellationToken.None);
     }
 
@@ -48,7 +50,7 @@ public class TopicService(IApplicationDbContext dbContext,
         var topicId = TopicId.Of(id);
         var result = await dbContext.Topics.FindAsync([topicId]);
 
-        if (result is null)
+        if (result is null || result.IsDeleted)
         {
             throw new TopicNotFoundException(id);
         }
@@ -58,7 +60,7 @@ public class TopicService(IApplicationDbContext dbContext,
 
     public async Task<List<TopicResponseDto>> GetTopicsAsync()
     {
-        var topics = await dbContext.Topics.AsNoTracking<Topic>()
+        var topics = await dbContext.Topics.Where(t => !t.IsDeleted).AsNoTracking<Topic>()
                                            .ToListAsync();
 
         return topics.ToTopicResponseDtoList();
@@ -70,7 +72,7 @@ public class TopicService(IApplicationDbContext dbContext,
 
         var topic = await dbContext.Topics.FindAsync([topicId]);
 
-        if (topic is null)
+        if (topic is null || topic.IsDeleted)
         {
             throw new TopicNotFoundException(id);
         }
