@@ -55,8 +55,28 @@ public class TopicService(IApplicationDbContext dbContext,
         return topics.ToTopicResponseDtoList();
     }
 
-    public Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicDto topicRequestDto)
+    public async Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicDto topicUpdateDto)
     {
-        throw new NotImplementedException();
+        var topicId = TopicId.Of(id);
+
+        var topic = await dbContext.Topics.FindAsync([topicId]);
+
+        if (topic is null)
+        {
+            throw new TopicNotFoundException(id);
+        }
+
+        topic.Title = topicUpdateDto.Title ?? topic.Title;
+        topic.Summary = topicUpdateDto.Summary ?? topic.Summary;
+        topic.TopicType = topicUpdateDto.TopicType ?? topic.TopicType;
+        topic.EventStart = topicUpdateDto.EventStart;
+        topic.Location = Location.Of(
+            topicUpdateDto.Location.City,
+            topicUpdateDto.Location.Street
+            );
+
+        await dbContext.SaveChangesAsync(CancellationToken.None);
+
+        return topic.ToTopicResponseDto();
     }
 }
