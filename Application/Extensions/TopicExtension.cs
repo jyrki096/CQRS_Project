@@ -1,7 +1,4 @@
-﻿using Application.Dtos;
-using Domain.Models;
-
-namespace Application.Extensions;
+﻿namespace Application.Extensions;
 
 public static class TopicExtension
 {

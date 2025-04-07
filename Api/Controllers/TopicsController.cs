@@ -1,5 +1,3 @@
-using Application.Dtos;
-using Application.Topics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
