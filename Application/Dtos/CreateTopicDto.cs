@@ -1,6 +1,6 @@
 ﻿namespace Application.Dtos;
 
-public record class CreateTopicRequestDto(
+public record class CreateTopicDto(
     string Title,
     string Summary,
     string TopicType,
