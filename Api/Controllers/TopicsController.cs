@@ -20,9 +20,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TopicResponseDto>> CreateTopic(CreateTopicDto createTopicDto)
+        public async Task<IResult> CreateTopic(CreateTopicDto createTopicDto)
         {
-            return Ok();
+            var response = await mediator.Send(new CreateTopicCommand(createTopicDto));
+            return Results.Created($"/topics/{response.Result.Id}", response.Result);
         }
 
         [HttpPut("{id}")]
