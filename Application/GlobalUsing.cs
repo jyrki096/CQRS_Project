@@ -1,5 +1,7 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 
+global using Shared.CQRS;
+
 global using Domain.Models;
 global using Domain.ValueObjects;
 

@@ -9,6 +9,9 @@ public static class DependencyInjection
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddControllers();
         services.AddOpenApi();
+
+        services.AddMediatR(config =>
+            config.RegisterServicesFromAssemblies(typeof(GetTopicsHandler).Assembly));
         
         return services;
     }

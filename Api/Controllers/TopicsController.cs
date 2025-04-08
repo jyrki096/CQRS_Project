@@ -5,12 +5,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TopicsController() : ControllerBase
+    public class TopicsController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<List<TopicResponseDto>>> GetTopics()
         {
-            return Ok();
+            return Ok(await mediator.Send(new GetTopicsQuery()));
         }
 
         [HttpGet("{id}")]
