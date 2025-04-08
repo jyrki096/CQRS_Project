@@ -1,5 +1,6 @@
-﻿namespace Application.Topics;
+﻿namespace Application.Topics.Deprecated;
 
+[Obsolete("Этот сервис устарел", true)]
 public interface ITopicService
 {
     Task<List<TopicResponseDto>> GetTopicsAsync();

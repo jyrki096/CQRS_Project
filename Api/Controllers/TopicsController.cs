@@ -5,37 +5,36 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TopicsController(ITopicService topicService) : ControllerBase
+    public class TopicsController() : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<List<TopicResponseDto>>> GetTopics()
         {
-            return Ok(await topicService.GetTopicsAsync());
+            return Ok();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TopicResponseDto>> GetTopic(Guid id)
         {
-            return Ok(await topicService.GetTopicAsync(id));
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<TopicResponseDto>> CreateTopic(CreateTopicDto createTopicDto)
         {
-            return Ok(await topicService.CreateTopicAsync(createTopicDto));
+            return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<TopicResponseDto>> UpdateTopic(Guid id, [FromBody] UpdateTopicDto updateTopicDto)
         {
-            return Ok(await topicService.UpdateTopicAsync(id, updateTopicDto));
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<TopicResponseDto>> DeleteTopic(Guid id)
         {
-            await topicService.DeleteTopicAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

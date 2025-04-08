@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Application.Topics;
+namespace Application.Topics.Deprecated;
 
+[Obsolete("Этот сервис устарел", true)]
 public class TopicService(IApplicationDbContext dbContext,
     ILogger<TopicService> logger) : ITopicService
 {
@@ -53,7 +54,7 @@ public class TopicService(IApplicationDbContext dbContext,
 
     public async Task<List<TopicResponseDto>> GetTopicsAsync()
     {
-        var topics = await dbContext.Topics.Where(t => !t.IsDeleted).AsNoTracking<Topic>()
+        var topics = await dbContext.Topics.Where(t => !t.IsDeleted).AsNoTracking()
                                            .ToListAsync();
 
         return topics.ToTopicResponseDtoList();
