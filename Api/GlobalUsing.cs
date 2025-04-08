@@ -5,6 +5,7 @@ global using MediatR;
 global using Application;
 global using Application.Exceptions;
 global using Application.Dtos;
+global using Application.Topics.Queries.GetTopic;
 global using Application.Topics.Queries.GetTopics;
 
 

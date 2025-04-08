@@ -8,15 +8,15 @@ namespace API.Controllers
     public class TopicsController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<TopicResponseDto>>> GetTopics()
+        public async Task<IResult> GetTopics()
         {
-            return Ok(await mediator.Send(new GetTopicsQuery()));
+            return Results.Ok(await mediator.Send(new GetTopicsQuery()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TopicResponseDto>> GetTopic(Guid id)
+        public async Task<IResult> GetTopic(Guid id)
         {
-            return Ok();
+            return Results.Ok(await mediator.Send(new GetTopicQuery(id))); 
         }
 
         [HttpPost]
