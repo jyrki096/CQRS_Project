@@ -2,4 +2,4 @@
 
 public record CreateTopicCommand(CreateTopicDto createTopicDto) : ICommand<CreateTopicResult>;
 
-public record CreateTopicResult(TopicResponseDto Result);
+public record CreateTopicResult(TopicResponseDto result);

@@ -1,4 +1,3 @@
-using Application.Topics.Commands.DeleteTopic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,13 +23,14 @@ namespace API.Controllers
         public async Task<IResult> CreateTopic(CreateTopicDto createTopicDto)
         {
             var response = await mediator.Send(new CreateTopicCommand(createTopicDto));
-            return Results.Created($"/topics/{response.Result.Id}", response.Result);
+            return Results.Created($"/topics/{response.result.Id}", response.result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TopicResponseDto>> UpdateTopic(Guid id, [FromBody] UpdateTopicDto updateTopicDto)
+        public async Task<IResult> UpdateTopic(Guid id, [FromBody] UpdateTopicDto updateTopicDto)
         {
-            return Ok();
+            var response = await mediator.Send(new UpdateTopicCommand(id, updateTopicDto));
+            return Results.Ok(response);
         }
 
         [HttpDelete("{id}")]
