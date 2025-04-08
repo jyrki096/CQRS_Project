@@ -16,7 +16,7 @@ public class UpdateTopicHandler(IApplicationDbContext dbContext)
             throw new TopicNotFoundException(request.id);
         }
 
-        MapModels(topic, request.updateTopicDto)
+        MapModels(topic, request.updateTopicDto);
 
         await dbContext.SaveChangesAsync(CancellationToken.None);
 
