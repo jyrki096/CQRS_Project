@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Application.Topics.Commands.UpdateTopic;
 
-namespace Application.Topics.Commands.UpdateTopic;
-
-public class UpdateTopicHandler(IApplicationDbContext dbContext)
+public class UpdateTopicHandler(IApplicationDbContext dbContext, IMapper mapper)
     : ICommandHandler<UpdateTopicCommand, UpdateTopicResult>
 {
     public async Task<UpdateTopicResult> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
@@ -16,22 +14,10 @@ public class UpdateTopicHandler(IApplicationDbContext dbContext)
             throw new TopicNotFoundException(request.id);
         }
 
-        MapModels(topic, request.updateTopicDto);
+        mapper.Map(request.updateTopicDto, topic);
 
         await dbContext.SaveChangesAsync(CancellationToken.None);
 
         return new UpdateTopicResult(topic.ToTopicResponseDto());
-    }
-
-    private void MapModels(Topic topic, UpdateTopicDto updateTopicDto)
-    {
-        topic.Title = updateTopicDto.Title ?? topic.Title;
-        topic.Summary = updateTopicDto.Summary ?? topic.Summary;
-        topic.TopicType = updateTopicDto.TopicType ?? topic.TopicType;
-        topic.EventStart = updateTopicDto.EventStart;
-        topic.Location = Location.Of(
-            updateTopicDto.Location.City,
-            updateTopicDto.Location.Street
-            );
     }
 }

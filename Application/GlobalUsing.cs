@@ -12,3 +12,4 @@ global using Application.Topics.Commands.CreateTopic;
 global using Application.Extensions;
 
 global using MediatR;
+global using AutoMapper;
