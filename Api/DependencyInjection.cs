@@ -1,6 +1,8 @@
 ﻿using Api.Exceptions.Handler;
 using Api.Security.Extensions;
 using Api.Security.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Api;
 
@@ -9,7 +11,16 @@ public static class DependencyInjection
     public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
-        services.AddControllers();
+
+        services.AddControllers(options =>
+        {
+            var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+
+            options.Filters.Add(new AuthorizeFilter(policy));
+        });
+
         services.AddOpenApi();
         services.AddIdentityServices(configuration);
         services.AddScoped<IJwtSecurityService, JwtSecurityService>();
