@@ -1,5 +1,6 @@
 ﻿using Api.Exceptions.Handler;
 using Api.Security.Extensions;
+using Api.Security.Services;
 
 namespace Api;
 
@@ -11,6 +12,7 @@ public static class DependencyInjection
         services.AddControllers();
         services.AddOpenApi();
         services.AddIdentityServices(configuration);
+        services.AddScoped<IJwtSecurityService, JwtSecurityService>();
 
 
         services.AddMediatR(config =>

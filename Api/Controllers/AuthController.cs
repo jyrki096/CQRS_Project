@@ -1,4 +1,5 @@
-﻿using Domain.Security;
+﻿using Api.Security.Services;
+using Domain.Security;
 using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,7 @@ namespace Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController(UserManager<CustomIdentityUser> manager) : ControllerBase
+public class AuthController(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity) : ControllerBase
 {
     [HttpPost("login")]
     public async Task<IResult> Login(LoginRequestDto loginRequestDto)
@@ -24,7 +25,8 @@ public class AuthController(UserManager<CustomIdentityUser> manager) : Controlle
 
         if (result)
         {
-            var response = new IdentityUserResponseDto(user.UserName!, user.Email!, "jwt");
+            var token = jwtSecurity.CreateToken(user);
+            var response = new IdentityUserResponseDto(user.UserName!, user.Email!, token);
 
             return Results.Ok(response);
         }
