@@ -1,14 +1,17 @@
 ﻿using Api.Exceptions.Handler;
+using Api.Security.Extensions;
 
 namespace Api;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApiServices(this IServiceCollection services)
+    public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddControllers();
         services.AddOpenApi();
+        services.AddIdentityServices(configuration);
+
 
         services.AddMediatR(config =>
             config.RegisterServicesFromAssemblies(typeof(GetTopicsHandler).Assembly));
