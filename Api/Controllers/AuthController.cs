@@ -35,4 +35,37 @@ public class AuthController(UserManager<CustomIdentityUser> manager, IJwtSecurit
 
         return Results.Unauthorized();
     }
+
+    [HttpPost("register")]
+    public async Task<IResult> Register(RegisterUserRequestDto dto)
+    {
+        if (await manager.Users.AllAsync(u => u.UserName == dto.Username))
+        {
+            return Results.BadRequest("Username уже занят");
+        }
+
+        if (await manager.Users.AllAsync(u => u.Email == dto.Email))
+        {
+            return Results.BadRequest("Email уже занят");
+        }
+
+        var user = new CustomIdentityUser
+        {
+            FullName = dto.FullName,
+            Email = dto.Email,
+            UserName = dto.Username,
+            About = string.Empty
+        };
+
+        var result = await manager.CreateAsync(user, dto.Password);
+
+        if (result.Succeeded)
+        {
+            var response = new IdentityUserResponseDto(user.UserName!, user.Email!, jwtSecurity.CreateToken(user));
+
+            return Results.Ok(new { result = response });
+        }
+
+        return Results.BadRequest(result.Errors);
+    }
 }
