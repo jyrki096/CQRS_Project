@@ -1,9 +1,4 @@
-﻿using Application.Auth.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Identity;
-
-namespace Application.Auth.Query;
+﻿namespace Application.Auth.Query;
 
 public class LoginUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity)
     : IQueryHandler<LoginUserQuery, LoginUserResult>

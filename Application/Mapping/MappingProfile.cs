@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Domain.Security;
-using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Application.Mapping;

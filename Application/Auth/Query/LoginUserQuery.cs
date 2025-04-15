@@ -1,7 +1,4 @@
-﻿using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Identity;
-
-namespace Application.Auth.Query;
+﻿namespace Application.Auth.Query;
 
 public record LoginUserQuery(LoginRequestDto LoginRequest) : IQuery<LoginUserResult>;
 

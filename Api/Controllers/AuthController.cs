@@ -1,13 +1,5 @@
-﻿using Application.Auth.Commands;
-using Application.Auth.Query;
-using Application.Auth.Services;
-using Application.Dtos;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 

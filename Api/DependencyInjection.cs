@@ -1,7 +1,7 @@
 ﻿using Api.Exceptions.Handler;
 using Api.Security.Extensions;
 using Api.Security.Services;
-using Application.Auth.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 

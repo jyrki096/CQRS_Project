@@ -1,9 +1,4 @@
-﻿using Application.Auth.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Identity;
-
-namespace Application.Auth.Commands;
+﻿namespace Application.Auth.Commands;
 
 public class RegisterUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity, IMapper mapper)
     : ICommandHandler<RegisterUserCommand, RegisterUserResult>
