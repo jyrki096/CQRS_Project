@@ -22,6 +22,7 @@ namespace Api.Exceptions.Handler
                                         httpContext.Response.StatusCode = StatusCodes.Status404NotFound
                                      ),
 
+
                 AuthorizationException => (
                                         exception.Message,
                                         exception.GetType().Name,

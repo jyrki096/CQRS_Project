@@ -2,7 +2,7 @@
 
 public record RegisterUserRequestDto(
     string FullName,
-    string Username,
+    string UserName,
     string Email,
     string Password
     );

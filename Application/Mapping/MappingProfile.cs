@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.Security;
+using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Application.Mapping;
@@ -20,5 +22,8 @@ public class MappingProfile : Profile
                 source.Location.City,
                 source.Location.Street
                 )));
+
+        CreateMap<RegisterUserRequestDto, CustomIdentityUser>()
+            .ForMember(dest => dest.About, opt => opt.MapFrom(_ => string.Empty));
     }
 }

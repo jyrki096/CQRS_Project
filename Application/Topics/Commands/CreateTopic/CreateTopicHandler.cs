@@ -12,16 +12,4 @@ public class CreateTopicHandler(IApplicationDbContext dbContext, IMapper mapper)
 
         return new CreateTopicResult(newTopic.ToTopicResponseDto());
     }
-
-    private Topic CreateTopic(CreateTopicDto topic)
-    {
-        return Topic.Create(
-            TopicId.Of(Guid.NewGuid()),
-            topic.Title,
-            topic.EventStart,
-            topic.Summary,
-            topic.TopicType,
-            Location.Of(topic.Location.City, topic.Location.Street)
-            );
-    }
 }
