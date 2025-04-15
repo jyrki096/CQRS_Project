@@ -1,0 +1,32 @@
+﻿using Application.Auth.Services;
+using Domain.Security;
+using Domain.Security.Dtos;
+using Microsoft.AspNetCore.Identity;
+
+namespace Application.Auth.Query;
+
+public class LoginUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity)
+    : IQueryHandler<LoginUserQuery, LoginUserResult>
+{
+    public async Task<LoginUserResult> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+    {
+        var user = await manager.FindByEmailAsync(request.LoginRequest.Email);
+
+        if (user is null)
+        {
+            throw new UserNotFoundException($"Пользователя с Email:{request.LoginRequest.Email} не существует");
+        }
+
+        var result = await manager.CheckPasswordAsync(user, request.LoginRequest.Password);
+
+        if (!result)
+        {
+            throw new InvalidLoginException("Неверная пара логин и пароль");
+        }
+
+        var token = jwtSecurity.CreateToken(user);
+        var response = new IdentityUserResponseDto(user.UserName!, user.Email!, token);
+
+        return new LoginUserResult(response);
+    }
+}

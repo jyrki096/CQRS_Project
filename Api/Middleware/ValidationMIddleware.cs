@@ -20,7 +20,7 @@ public class ValidationMiddleware(RequestDelegate next)
                 Instance = context.Request.Path
             });
             return;
-        }     
+        }
 
         if (context.Request.Method.Equals("POST"))
         {
@@ -59,11 +59,13 @@ public class ValidationMiddleware(RequestDelegate next)
                     Message = "Ошибка валидации данных"
                 });
 
-                return;
+               
             }
         }
-
-        await next(context);
+        else
+        {
+            await next(context);
+        }
     }
 
     private bool IsValidPassword(string password)

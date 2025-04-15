@@ -1,4 +1,5 @@
-﻿using Domain.Security;
+﻿using Application.Auth.Services;
+using Domain.Security;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

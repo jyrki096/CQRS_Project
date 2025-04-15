@@ -1,6 +1,6 @@
 ﻿using Domain.Security;
 
-namespace Api.Security.Services;
+namespace Application.Auth.Services;
 
 public interface IJwtSecurityService
 {
