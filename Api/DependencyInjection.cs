@@ -1,4 +1,5 @@
 ﻿using Api.Exceptions.Handler;
+using Api.Middleware;
 using Api.Security.Extensions;
 using Api.Security.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -35,6 +36,8 @@ public static class DependencyInjection
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UseMiddleware<ValidationMiddleware>();
+
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
