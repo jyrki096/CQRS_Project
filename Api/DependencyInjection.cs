@@ -1,7 +1,6 @@
 ﻿using Api.Exceptions.Handler;
-using Api.Security.Extensions;
-using Api.Security.Services;
-
+using Application.Security.Services;
+using Infrastructure.Security.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
@@ -23,7 +22,7 @@ public static class DependencyInjection
         });
 
         services.AddOpenApi();
-        services.AddIdentityServices(configuration);
+        
         services.AddScoped<IJwtSecurityService, JwtSecurityService>();
 
 

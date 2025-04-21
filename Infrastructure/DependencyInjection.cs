@@ -1,4 +1,5 @@
 ﻿using Application.Data.DataBaseContext;
+using Infrastructure.Security.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +10,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddIdentityServices(configuration);
         services.AddScoped<IApplicationDbContext, ApplicationDbContext> ();
 
         services.AddDbContext<ApplicationDbContext>(options =>

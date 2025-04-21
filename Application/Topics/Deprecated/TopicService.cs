@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Application.Dtos.Topic;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Topics.Deprecated;
 

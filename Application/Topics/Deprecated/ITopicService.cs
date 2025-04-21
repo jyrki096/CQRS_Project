@@ -1,4 +1,6 @@
-﻿namespace Application.Topics.Deprecated;
+﻿using Application.Dtos.Topic;
+
+namespace Application.Topics.Deprecated;
 
 [Obsolete("Этот сервис устарел", true)]
 public interface ITopicService

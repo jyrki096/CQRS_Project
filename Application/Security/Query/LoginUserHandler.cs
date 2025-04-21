@@ -1,4 +1,6 @@
-﻿namespace Application.Auth.Query;
+﻿using Application.Security.Services;
+
+namespace Application.Security.Query;
 
 public class LoginUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity)
     : IQueryHandler<LoginUserQuery, LoginUserResult>
@@ -9,7 +11,7 @@ public class LoginUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecur
 
         if (user is null)
         {
-            throw new UserNotFoundException($"Пользователя с Email:{request.LoginRequest.Email} не существует");
+            throw new UserNotFoundException(request.LoginRequest.Email);
         }
 
         var result = await manager.CheckPasswordAsync(user, request.LoginRequest.Password);

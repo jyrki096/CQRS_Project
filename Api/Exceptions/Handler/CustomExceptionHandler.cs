@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using Domain.Exceptions;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Api.Exceptions.Handler;
 
@@ -25,7 +26,7 @@ public class CustomExceptionHandler(
             AuthorizationException => (
                                     exception.Message,
                                     exception.GetType().Name,
-                                    httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized
+                                    httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
                                 ),
             _ => (
                     exception.Message,

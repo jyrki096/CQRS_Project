@@ -1,4 +1,4 @@
-﻿namespace Application.Auth.Commands;
+﻿namespace Application.Security.Commands;
 
 public class RegisterUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity, IMapper mapper)
     : ICommandHandler<RegisterUserCommand, RegisterUserResult>
@@ -7,25 +7,25 @@ public class RegisterUserHandler(UserManager<CustomIdentityUser> manager, IJwtSe
     {
         if (await manager.Users.AnyAsync(u => u.UserName == request.Dto.UserName))
         {
-            throw new UserExistException($"Пользователь с UserName: {request.Dto.UserName} уже существует");
+            throw new UsernameAlreadyExistException(request.Dto.UserName);
         }
 
         if (await manager.Users.AnyAsync(u => u.Email == request.Dto.Email))
         {
-            throw new EmailExistException($"Пользователь с Email: {request.Dto.Email} уже существует");
+            throw new EmailAlreadyExistException(request.Dto.Email);
         }
 
         var user = mapper.Map<CustomIdentityUser>(request.Dto);
 
         var result = await manager.CreateAsync(user, request.Dto.Password);
 
-        if (!result.Succeeded)
+        if (result.Succeeded)
         {
-            throw new UserNotCreateException("Произошла ошибка во время создания пользователя");
+            var response = new IdentityUserResponseDto(user.UserName!, user.Email!, jwtSecurity.CreateToken(user));
+            return new RegisterUserResult(response);
+            
         }
 
-        var response = new IdentityUserResponseDto(user.UserName!, user.Email!, jwtSecurity.CreateToken(user));
-
-        return new RegisterUserResult(response);
+        throw new AuthorizationException(string.Join(";", result.Errors));
     }
 }

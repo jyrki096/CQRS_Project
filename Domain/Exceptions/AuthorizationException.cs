@@ -1,6 +1,6 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
-public class AuthorizationException : Exception
+public class AuthorizationException : DomainException
 {
     public AuthorizationException(string message) : base(message)
     {

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
-namespace Api.Security.Extensions;
+namespace Infrastructure.Security.Extensions;
 
 public static class IdentityOptionsExtension
 {

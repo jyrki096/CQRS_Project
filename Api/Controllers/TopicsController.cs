@@ -1,3 +1,5 @@
+using Application.Dtos.Topic;
+
 namespace API.Controllers;
 
 [Route("api/[controller]")]
