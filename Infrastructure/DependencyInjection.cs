@@ -1,5 +1,6 @@
 ﻿using Application.Data.DataBaseContext;
 using Infrastructure.Security.Extensions;
+using Infrastructure.Security.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,8 +11,11 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddHttpContextAccessor();
         services.AddIdentityServices(configuration);
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext> ();
+        
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IUserAccessor, UserAccessor>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
