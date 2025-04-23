@@ -25,5 +25,15 @@ public class MappingProfile : Profile
 
         CreateMap<RegisterUserRequestDto, CustomIdentityUser>()
             .ForMember(dest => dest.About, opt => opt.MapFrom(_ => string.Empty));
+
+        CreateMap<UserProfileDto, CustomIdentityUser>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Username))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName));
+
+        CreateMap<RelationshipDto, Relationship>()
+            .ForMember(dest => dest.TopicReference, opt => opt.MapFrom(src => src.TopicReference))
+            .ForMember(dest => dest.UserReference, opt => opt.MapFrom(src => src.UserReference))
+            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
     }
 }

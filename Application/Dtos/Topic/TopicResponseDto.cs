@@ -6,7 +6,8 @@ public record class TopicResponseDto(
     string Summary,
     string TopicType,
     LocationDto Location,
-    DateTime? EventStart
+    DateTime? EventStart,
+    List<UserProfileDto> Users
     );
 
 

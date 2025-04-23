@@ -2,7 +2,7 @@
 
 namespace Application.Extensions;
 
-public static class TopicExtension
+public static class TopicExtensions
 {
     public static TopicResponseDto ToTopicResponseDto(this Topic topic)
     {
@@ -12,8 +12,15 @@ public static class TopicExtension
                                         Summary: topic.Summary,
                                         TopicType: topic.TopicType,
                                         Location: new LocationDto(topic.Location.City, topic.Location.Street),
-                                        EventStart: topic.EventStart
-                                   );
+                                        EventStart: topic.EventStart,
+                                        Users: topic.Users.Select(r => new UserProfileDto(
+                                                                r.CurrentUser.Id,
+                                                                r.CurrentUser.UserName!,
+                                                                r.CurrentUser.FullName,
+                                                                r.Role.ToString()
+                                                                )).ToList()
+                                                                );
+                                   
     }
 
     public static List<TopicResponseDto> ToTopicResponseDtoList(this List<Topic> topics)
