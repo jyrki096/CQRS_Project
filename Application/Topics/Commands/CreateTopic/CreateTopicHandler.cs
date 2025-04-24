@@ -18,6 +18,7 @@ public class CreateTopicHandler(IApplicationDbContext dbContext, IUserAccessor u
             topic: newTopic
             );
 
+        
         newTopic.Users.Add(relationship);
 
         await dbContext.Topics.AddAsync(newTopic);

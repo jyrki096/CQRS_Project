@@ -1,6 +1,9 @@
-﻿namespace Application.Topics.Commands.UpdateTopic;
+﻿using Application.Exceptions;
+using Application.Security.Services;
 
-public class UpdateTopicHandler(IApplicationDbContext dbContext, IMapper mapper)
+namespace Application.Topics.Commands.UpdateTopic;
+
+public class UpdateTopicHandler(IApplicationDbContext dbContext, IMapper mapper, IUserAccessor userAccessor)
     : ICommandHandler<UpdateTopicCommand, UpdateTopicResult>
 {
     public async Task<UpdateTopicResult> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
@@ -12,6 +15,24 @@ public class UpdateTopicHandler(IApplicationDbContext dbContext, IMapper mapper)
         if (topic is null || topic.IsDeleted)
         {
             throw new TopicNotFoundException(request.id);
+        }
+
+        var username = userAccessor.GetUsername();
+        var user = await dbContext.Users
+            .FirstOrDefaultAsync(u => u.UserName == username);
+
+        if (user is null)
+        {
+            throw new UserNotFoundException(username, true);
+        }
+
+        var organizerUsername = topic.Users
+                                     .FirstOrDefault(u => u.Role == ParticipantRole.Organizer)
+                                     ?.CurrentUser.UserName!;
+
+        if (organizerUsername != username)
+        {
+            throw new UserNotOrganizerException(username, topic.Id.Value);
         }
 
         mapper.Map(request.updateTopicDto, topic);

@@ -2,6 +2,7 @@
 global using Microsoft.AspNetCore.Identity;
 
 global using Shared.CQRS;
+global using Domain.Enums;
 
 global using Domain.Models;
 global using Domain.ValueObjects;

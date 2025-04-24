@@ -2,10 +2,15 @@
 
 public class UserNotFoundException : AuthorizationException
 {
-    public string Email { get; }
-
-    public UserNotFoundException(string email) : base($"Пользователя с Email:{email} не существует")
+    public UserNotFoundException(string email) 
+        : base($"Пользователя с Email:{email} не существует")
     {
-        Email = email;
+
+    }
+
+    public UserNotFoundException(string username, bool isUsername)
+       : base($"Пользователя с Email:{username} не существует")
+    {
+
     }
 }
