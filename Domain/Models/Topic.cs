@@ -7,6 +7,7 @@ public class Topic : Entity<TopicId>
     public string Summary { get; set; } = default!;
     public string TopicType { get; set; } = default!;
     public Location Location { get; set; } = default!;
+    public bool IsVoided { get; set; } = default!;
 
     public List<Relationship> Users { get; set; } = new();
 
