@@ -8,6 +8,8 @@ public class GetTopicsHandler(IApplicationDbContext dbContext)
     {
         var topics = await dbContext.Topics
                                     .AsNoTracking()
+                                    .Include(t => t.Users)
+                                    .ThenInclude(r => r.CurrentUser)
                                     .Where(t => !t.IsDeleted)
                                     .ToListAsync();
 

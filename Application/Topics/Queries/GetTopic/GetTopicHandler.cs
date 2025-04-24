@@ -7,7 +7,10 @@ public class GetTopicHandler(IApplicationDbContext dbContext)
         CancellationToken cancellationToken)
     {
         var topicId = TopicId.Of(request.id);
-        var result = await dbContext.Topics.FindAsync([topicId], cancellationToken);
+        var result = await dbContext.Topics
+                                    .Include(t => t.Users)
+                                    .ThenInclude(r => r.CurrentUser)
+                                    .FirstOrDefaultAsync(t => t.Id == topicId, cancellationToken);
 
         if (result is null || result.IsDeleted)
         {
