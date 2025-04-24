@@ -13,6 +13,7 @@ public static class TopicExtensions
                                         TopicType: topic.TopicType,
                                         Location: new LocationDto(topic.Location.City, topic.Location.Street),
                                         EventStart: topic.EventStart,
+                                        IsVoided: topic.IsVoided,
                                         Users: topic.Users.Select(r => new UserProfileDto(
                                                                 r.CurrentUser.Id,
                                                                 r.CurrentUser.UserName!,
