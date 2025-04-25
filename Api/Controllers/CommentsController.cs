@@ -10,16 +10,16 @@ public class CommentsController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet("{id}")]
-    public async Task<IResult> GetComments(Guid topicId)
+    public async Task<IResult> GetComments(Guid id)
     {
-        return Results.Ok(await mediator.Send(new GetCommentsQuery(topicId)));
+        return Results.Ok(await mediator.Send(new GetCommentsQuery(id)));
     }
 
     [HttpPost("{id}")]
-    public async Task<IResult> CreateComment(Guid topicId, CommentRequestDto dto)
+    public async Task<IResult> CreateComment(Guid id, [FromBody] CommentRequestDto dto)
     {
-        var response = await mediator.Send(new CreateCommentCommand(topicId, dto.Text));
+        var response = await mediator.Send(new CreateCommentCommand(id, dto.Text));
 
-        return Results.Created($"/comments/{topicId}", response.Result);
+        return Results.Created($"/comments/{id}", response.Result);
     }
 }
