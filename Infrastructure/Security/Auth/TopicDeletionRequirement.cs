@@ -1,9 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using System.Security.Claims;
-using Domain.Enums;
+﻿using System.Security.Claims;
 
 namespace Infrastructure.Security.Auth;
 

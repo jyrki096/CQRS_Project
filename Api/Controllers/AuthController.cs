@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Application.Dtos.Security;
+using Application.Security.Commands;
+using Application.Security.Query;
 
 namespace Api.Controllers;
 

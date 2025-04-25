@@ -1,7 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-using Domain.Security;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Infrastructure.Data.DataBaseContext;

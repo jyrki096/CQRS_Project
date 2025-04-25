@@ -1,5 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-using Infrastructure.Security.Extensions;
+﻿using Infrastructure.Security.Extensions;
 using Infrastructure.Security.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

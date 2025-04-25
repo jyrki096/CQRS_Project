@@ -1,6 +1,4 @@
-﻿using Infrastructure.Security.Auth;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Infrastructure.Security.Extensions;
 

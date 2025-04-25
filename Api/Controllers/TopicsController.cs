@@ -1,6 +1,11 @@
 using Application.Dtos.Topic;
+using Application.Topics.Commands.CreateTopic;
+using Application.Topics.Commands.DeleteTopic;
+using Application.Topics.Commands.UpdateTopic;
 using Application.Topics.Commands.JoinLeaveTopic;
-using Microsoft.AspNetCore.Authorization;
+using Application.Topics.Queries.GetTopic;
+using Application.Topics.Queries.GetTopics;
+
 
 namespace API.Controllers;
 

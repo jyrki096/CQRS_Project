@@ -1,6 +1,4 @@
-﻿using Domain.Security;
-
-namespace Domain.Models;
+﻿namespace Domain.Models;
 
 public class Comment : Entity<CommentId>
 {

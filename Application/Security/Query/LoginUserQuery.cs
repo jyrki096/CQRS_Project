@@ -1,6 +1,4 @@
-﻿using Application.Dtos.Security;
-
-namespace Application.Security.Query;
+﻿namespace Application.Security.Query;
 
 public record LoginUserQuery(LoginRequestDto LoginRequest) : IQuery<LoginUserResult>;
 

@@ -1,6 +1,4 @@
-﻿using Domain.Enums;
-
-namespace Application.Topics.Queries.GetTopic;
+﻿namespace Application.Topics.Queries.GetTopic;
 
 public class CreateTopicHandler(IApplicationDbContext dbContext, IUserAccessor userAccessor, IMapper mapper)
     : ICommandHandler<CreateTopicCommand, CreateTopicResult>

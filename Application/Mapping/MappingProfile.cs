@@ -1,7 +1,4 @@
-﻿using Application.Dtos.Comment;
-using Application.Dtos.Security;
-using Application.Dtos.Topic;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Application.Mapping;

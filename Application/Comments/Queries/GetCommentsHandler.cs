@@ -1,5 +1,4 @@
-﻿using Application.Dtos.Comment;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper.QueryableExtensions;
 
 namespace Application.Comments.Queries;
 

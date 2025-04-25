@@ -1,6 +1,4 @@
-﻿using Domain.Enums;
-
-namespace Application.Dtos.Topic;
+﻿namespace Application.Dtos.Topic;
 public record RelationshipDto(
     RelationshipId Id,
     TopicId TopicReference,

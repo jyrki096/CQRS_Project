@@ -1,5 +1,4 @@
 ﻿using Domain.Enums;
-using Domain.Security;
 using System.Net.Http.Headers;
 
 namespace Domain.Models;

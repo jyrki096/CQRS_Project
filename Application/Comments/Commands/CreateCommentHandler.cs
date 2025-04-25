@@ -1,6 +1,4 @@
-﻿using Application.Dtos.Comment;
-
-namespace Application.Comments.Commands;
+﻿namespace Application.Comments.Commands;
 
 public class CreateCommentHandler(IApplicationDbContext dbContext, IUserAccessor userAccessor, IMapper mapper)
     : ICommandHandler<CreateCommentCommand, CreateCommentResult>

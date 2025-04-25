@@ -1,7 +1,4 @@
-﻿
-
-using Application.Topics.Queries.GetTopic;
-using MediatR;
+﻿using Application.Topics.Queries.GetTopic;
 
 namespace Application.Topics.Commands.JoinLeaveTopic;
 

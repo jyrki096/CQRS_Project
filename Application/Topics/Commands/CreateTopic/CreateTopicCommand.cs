@@ -1,6 +1,4 @@
-﻿using Application.Dtos.Topic;
-
-namespace Application.Topics.Commands.CreateTopic;
+﻿namespace Application.Topics.Commands.CreateTopic;
 
 public record CreateTopicCommand(CreateTopicDto createTopicDto) : ICommand<CreateTopicResult>;
 

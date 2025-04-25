@@ -1,6 +1,5 @@
-﻿using Domain.Security;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Data.Extensions;
 

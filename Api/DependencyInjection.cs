@@ -1,9 +1,8 @@
-﻿using Api.Exceptions.Handler;
+﻿using Microsoft.AspNetCore.Mvc.Authorization;
+using Api.Exceptions.Handler;
 using Application.Security.Services;
+using Application.Topics.Queries.GetTopics;
 using Infrastructure.Security.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Net;
 
 namespace Api;
 

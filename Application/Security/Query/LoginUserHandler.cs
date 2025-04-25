@@ -1,6 +1,4 @@
-﻿using Application.Security.Services;
-
-namespace Application.Security.Query;
+﻿namespace Application.Security.Query;
 
 public class LoginUserHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurity)
     : IQueryHandler<LoginUserQuery, LoginUserResult>

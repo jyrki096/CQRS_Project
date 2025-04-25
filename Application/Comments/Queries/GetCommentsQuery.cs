@@ -1,6 +1,4 @@
-﻿using Application.Dtos.Comment;
-
-namespace Application.Comments.Queries;
+﻿namespace Application.Comments.Queries;
 
 public record GetCommentsQuery(Guid TopicId) : IQuery<GetCommentsResult>;
 
