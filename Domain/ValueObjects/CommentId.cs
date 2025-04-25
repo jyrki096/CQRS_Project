@@ -1,18 +1,17 @@
 ﻿namespace Domain.ValueObjects;
 
-public record class TopicId
+public record CommentId
 {
     public Guid Value { get; }
+    private CommentId(Guid value) => Value = value;
 
-    private TopicId(Guid value) => Value = value;
-
-    public static TopicId Of(Guid value)
+    public static CommentId Of(Guid value)
     {
         if (value == Guid.Empty)
         {
             throw new DomainException("TopicId не может быть пустым.");
         }
 
-        return new TopicId(value);
+        return new CommentId(value);
     }
 }
