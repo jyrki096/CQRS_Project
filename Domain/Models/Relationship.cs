@@ -25,7 +25,7 @@ public class Relationship : Entity<RelationshipId>
         ArgumentNullException.ThrowIfNull(topic);
 
 
-        return new Relationship
+        return new()
         {
             Id = id,
             TopicReference = topicId,
