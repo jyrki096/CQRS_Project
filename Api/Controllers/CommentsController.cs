@@ -1,5 +1,6 @@
 ﻿using Application.Comments.Commands;
 using Application.Comments.Queries;
+using Application.Dtos.Comment;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +11,16 @@ namespace Api.Controllers
     public class CommentsController(IMediator mediator) : ControllerBase
     {
 
-        [HttpGet("TopicId")]
+        [HttpGet("{id}")]
         public async Task<IResult> GetComments(Guid topicId)
         {
             return Results.Ok(await mediator.Send(new GetCommentsQuery(topicId)));
         }
 
-        [HttpPost("TopicId")]
-        public async Task<IResult> CreateComment(Guid topicId, string text)
+        [HttpPost("{id}")]
+        public async Task<IResult> CreateComment(Guid topicId, CommentRequestDto dto)
         {
-            var response = await mediator.Send(new CreateCommentCommand(topicId, text));
+            var response = await mediator.Send(new CreateCommentCommand(topicId, dto.Text));
 
             return Results.Created($"/comments/{topicId}", response.Result);
         }
