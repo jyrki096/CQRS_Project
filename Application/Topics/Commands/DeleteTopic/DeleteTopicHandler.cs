@@ -13,6 +13,16 @@ public class DeleteTopicHandler(IApplicationDbContext dbContext)
             throw new TopicNotFoundException(request.id);
         }
 
+        var relationships = await dbContext.Relationships
+                                           .Where(r => r.TopicReference == topicId)
+                                           .ToListAsync();
+
+        foreach (var relationship in relationships)
+        {
+            relationship.IsDeleted = true;
+            relationship.DeletedAt = DateTimeOffset.UtcNow;
+        }
+
         topic.IsDeleted = true;
         topic.DeletedAt = DateTimeOffset.UtcNow;
 

@@ -3,6 +3,7 @@ using Application.Security.Services;
 using Infrastructure.Security.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Net;
 
 namespace Api;
 
@@ -40,6 +41,25 @@ public static class DependencyInjection
         {
             app.MapOpenApi();
         }
+
+        app.UseStatusCodePages(async context =>
+        {
+            if (context.HttpContext.Response.StatusCode == 403)
+            {
+                var details = new ProblemDetails
+                {
+                    Title = "Forbidden",
+                    Detail = "У вас недостаточно прав для этого действия",
+                    Status = StatusCodes.Status403Forbidden,
+                    Instance = context.HttpContext.Request.Path
+                };
+
+                details.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+
+
+                await context.HttpContext.Response.WriteAsJsonAsync(details);
+            };
+        });
 
         app.UseExceptionHandler(options => { });
 
