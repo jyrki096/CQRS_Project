@@ -36,16 +36,17 @@ public static class IdentityOptionsExtension
                     };
                 });
 
+        services.AddTransient<IAuthorizationHandler, TopicDeletionRequirementHandler>();
+
         services.AddAuthorization(options =>
         {
             options.AddPolicy("IsTopicAuthor", policy =>
             {
-                policy.Requirements.Add(new TopicDeletionRequirementHandler())
+                policy.Requirements.Add(new TopicDeletionRequirement());
             });
         });
 
-        services.AddTransient<IAuthorizationHandler, TopicDeletionRequirementHandler>();
-        services.AddScoped<IJwtSecurityService, IJwtSecurityService>();
+        
 
         return services;      
     }

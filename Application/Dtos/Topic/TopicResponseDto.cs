@@ -7,7 +7,7 @@ public record class TopicResponseDto(
     string TopicType,
     LocationDto Location,
     DateTime? EventStart,
-    bool IsVoided
+    bool IsVoided,
     List<UserProfileDto> Users
     );
 
