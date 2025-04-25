@@ -41,6 +41,8 @@ public static class DependencyInjection
             app.MapOpenApi();
         }
 
+        app.UseExceptionHandler(options => { });
+
         app.UseStatusCodePages(async context =>
         {
             if (context.HttpContext.Response.StatusCode == 403)
@@ -59,8 +61,6 @@ public static class DependencyInjection
                 await context.HttpContext.Response.WriteAsJsonAsync(details);
             };
         });
-
-        app.UseExceptionHandler(options => { });
 
         app.UseHttpsRedirection();
 

@@ -32,7 +32,7 @@ public class TopicDeletionRequirementHandler(IApplicationDbContext dbContext,
         var topicId = TopicId.Of(Guid.Parse(value));
         var relationship = await dbContext.Relationships
                                           .AsNoTracking()
-                                          .FirstOrDefaultAsync(r => r.UserReference == usedId.ToString()
+                                          .FirstOrDefaultAsync(r => r.UserReference == usedId
                                                 && r.TopicReference == topicId);
 
         if (relationship?.Role == ParticipantRole.Organizer)

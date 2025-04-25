@@ -48,7 +48,7 @@ public class TopicsController(IMediator mediator) : ControllerBase
         return Results.Ok(isSuccess);
     }
 
-    [HttpPost("{id}")]
+    [HttpPost("join/{id}")]
     public async Task<IResult> JoinLeaveTopic(Guid id)
     {  
         return Results.Ok(await mediator.Send(new JoinLeaveTopicCommand(id)));
