@@ -11,6 +11,8 @@ public class Topic : Entity<TopicId>
 
     public List<Relationship> Users { get; set; } = new();
 
+    public List<Comment> Comments { get; set; } = new();
+
     public static Topic Create(
         TopicId topicId, string title, DateTime eventStart,
         string summary, string topicType, Location location)

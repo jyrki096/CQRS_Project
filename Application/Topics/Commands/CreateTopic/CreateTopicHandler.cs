@@ -9,6 +9,7 @@ public class CreateTopicHandler(IApplicationDbContext dbContext, IUserAccessor u
     {
         var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userAccessor.GetUsername());
         var newTopic = mapper.Map<Topic>(request.createTopicDto);
+
         var relationship = Relationship.Create(
             id: RelationshipId.Of(Guid.NewGuid()),
             userId: user!.Id,

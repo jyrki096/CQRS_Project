@@ -1,4 +1,5 @@
-﻿using Application.Dtos.Security;
+﻿using Application.Dtos.Comment;
+using Application.Dtos.Security;
 using Application.Dtos.Topic;
 using AutoMapper;
 using Microsoft.AspNetCore.Routing.Constraints;
@@ -35,5 +36,11 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.TopicReference, opt => opt.MapFrom(src => src.TopicReference))
             .ForMember(dest => dest.UserReference, opt => opt.MapFrom(src => src.UserReference))
             .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
+
+        CreateMap<Comment, CommentDto>()
+            .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Author.UserName))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.Author.FullName))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Value));
     }
 }
+ 

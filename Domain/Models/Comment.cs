@@ -6,24 +6,23 @@ public class Comment : Entity<CommentId>
 {
     public CustomIdentityUser Author { get; set; } = default!;
     public Topic CurrentTopic { get; set; } = default!;
-    public DateTime CreateAt { get; set; } = default!;
+    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     public string Text { get; set; } = default!;
 
-    public static Comment Create(CommentId commentId, CustomIdentityUser author,
-        Topic currentTopic, DateTime createAt, string text)
+    public static Comment Create(CommentId id, CustomIdentityUser author,
+        Topic topic, string text)
     {
-        ArgumentNullException.ThrowIfNull(commentId);
+        ArgumentNullException.ThrowIfNull(id);
         ArgumentNullException.ThrowIfNull(author);
-        ArgumentNullException.ThrowIfNull(currentTopic);
+        ArgumentNullException.ThrowIfNull(topic);
 
         ArgumentException.ThrowIfNullOrWhiteSpace(text);
 
         return new()
         {
-            Id = commentId,
+            Id = id,
             Author = author,
-            CurrentTopic = currentTopic,
-            CreateAt = createAt,
+            CurrentTopic = topic,
             Text = text
         };
     }
